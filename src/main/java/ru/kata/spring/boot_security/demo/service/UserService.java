@@ -22,9 +22,8 @@ public interface UserService extends UserDetailsService {
 
     User findByUsername(String username);
 
-
     @Override
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 
-    boolean saveUser(User userForm);
+
 }

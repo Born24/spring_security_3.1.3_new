@@ -29,12 +29,8 @@ public class UsersController {
     @GetMapping("/findById")
     public String findById(@RequestParam("id") Long id, Model model) {
         User user = userService.findById(id);
+        model.addAttribute("user", user);
 
-        if (user != null) {
-            model.addAttribute("user", user);
-        } else {
-            model.addAttribute("errorMessage", "User not found");
-        }
         return "findById";
     }
 
@@ -47,38 +43,32 @@ public class UsersController {
     @GetMapping("/update/{id}")
     public String editUserForm(@PathVariable("id") Long id, Model model) {
         User user = userService.findById(id);
+        model.addAttribute("user", user);
 
-        if (user != null) {
-            model.addAttribute("user", user);
-            return "edit";
-        } else {
-            model.addAttribute("errorMessage", "User not found");
-            return "error";
-        }
+        return "edit";
+
     }
 
     @PostMapping("/update/{id}")
     public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
         user.setId(id);
         userService.update(user);
+
         return "redirect:/admin";
     }
 
     @DeleteMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.delete(id);
+
         return "redirect:/admin";
     }
 
     @GetMapping("/users/{id}")
     public String viewUser(@PathVariable Long id, Model model) {
         User user = userService.findById(id);
+        model.addAttribute("user", user);
 
-        if (user != null) {
-            model.addAttribute("user", user);
-        } else {
-            model.addAttribute("errorMessage", "User not found");
-        }
         return "show";
     }
 
@@ -86,12 +76,8 @@ public class UsersController {
     public String userProfile(Principal principal, Model model) {
         String username = principal.getName();
         User user = userService.findByUsername(username);
+        model.addAttribute("user", user);
 
-        if (user != null) {
-            model.addAttribute("user", user);
-        } else {
-            model.addAttribute("errorMessage", "User not found");
-        }
         return "user";
     }
 }

@@ -16,20 +16,33 @@ public class Role implements GrantedAuthority {
     @Column(name = "role", unique = true)
     private String role;
 
-    public Role() {}
+    public Role() {
+    }
 
-    public Role(String role) {this.role = "ROLE_" + role;}
+    public Role(String role) {
+        this.role = "ROLE_" + role;
+    }
 
     @Override
-    public String getAuthority() {return role;}
+    public String getAuthority() {
+        return role;
+    }
 
-    public void setId(Long id) {this.id = id;}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Long getId() {return id;}
+    public Long getId() {
+        return id;
+    }
 
-    public String getRole() {return role;}
+    public String getRole() {
+        return role;
+    }
 
-    public void setRole(String role) {this.role = role;}
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -42,9 +55,13 @@ public class Role implements GrantedAuthority {
     }
 
     @Override
-    public int hashCode() {return Objects.hash(role);}
+    public int hashCode() {
+        return Objects.hash(role);
+    }
 
     @Override
-    public String toString() {return this.role;}
+    public String toString() {
+        return this.role;
+    }
 }
 

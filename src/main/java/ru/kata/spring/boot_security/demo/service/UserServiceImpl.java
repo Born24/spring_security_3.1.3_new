@@ -74,18 +74,6 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    @Override
-    @Transactional
-    public boolean saveUser(User userForm) {
-        if (userForm.getUsername() == null || userForm.getPassword() == null) {
-            return false;
-        }
-        Role defoultRole = new Role("Default Role");
-        userForm.getRoles().add(defoultRole);
-        add(userForm);
-        return true;
-    }
-
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream()
                 .map(r -> new SimpleGrantedAuthority(r.getRole()))
