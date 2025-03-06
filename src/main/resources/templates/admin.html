@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Admin Panel</title>
+</head>
+<body>
+<h1>User List</h1>
+
+<!-- Поиск пользователя по ID -->
+<h2>Find User by ID</h2>
+<form th:action="@{/findById}" method="get">
+  Enter User ID: <input type="number" name="id" required>
+  <button type="submit">Search</button>
+</form>
+
+<!-- Таблица пользователей -->
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Lastname</th>
+    <th>Age</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.id}"></td>
+    <td th:text="${user.name}"></td>
+    <td th:text="${user.lastName}"></td>
+    <td th:text="${user.age}"></td>
+    <td>
+      <a th:href="@{/users/{id}(id=${user.id})}">View</a>
+      <a th:href="@{/update/{id}(id=${user.id})}">Edit</a>
+      <form th:action="@{/delete/{id}(id=${user.id})}" method="post" style="display:inline;">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- Добавление нового пользователя -->
+<h2>Add New User</h2>
+<form th:action="@{/addUser}" method="post">
+  Name: <input type="text" name="name" required>
+  Lastname: <input type="text" name="lastName" required>
+  Age: <input type="number" name="age" min="1" required>
+  <button type="submit">Add User</button>
+</form>
+
+<!-- Выход из системы -->
+<form th:action="@{/logout}" method="post" style="display: inline;">
+  <button type="submit">Logout</button>
+</form>
+</body>
+</html>
